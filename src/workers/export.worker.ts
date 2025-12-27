@@ -246,8 +246,13 @@ function createEnrichedDataSheet(wb: ExcelJS.Workbook, data: EnrichedRecord[], o
                 newRecord[header] = value;
             }
         });
+        delete newRecord['_internalId'];
+        delete newRecord['Max_PairScore'];
         return newRecord;
     });
+    
+    const finalColumns = ws.columns.filter(c => c.key !== '_internalId' && c.key !== 'Max_PairScore');
+    ws.columns = finalColumns;
 
     ws.addRows(dataForSheet);
     
@@ -751,5 +756,3 @@ function createDashboardReportSheet(wb: ExcelJS.Workbook, chartImages: Record<st
         addImage(chartImages.map, { col: 4, row: currentRow }, { width: 347, height: 749 });
     }
 }
-
-    

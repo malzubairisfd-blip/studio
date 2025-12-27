@@ -5,7 +5,7 @@
 import ExcelJS from "exceljs";
 import type { AuditFinding } from "@/lib/auditEngine";
 import type { RecordRow } from "@/lib/types";
-import { generateArabicClusterSummary, getDecisionAndNote } from '@/lib/arabicClusterSummary';
+import { getDecisionAndNote } from '@/lib/arabicClusterSummary';
 
 /**
  * Safely posts a message from the worker, using structuredClone to verify serializability.
@@ -85,7 +85,7 @@ self.onmessage = async (event) => {
 };
 
 
-function enrichData(cachedData: any): { enrichedRecords: EnrichedRecord[], enrichedClusters: any[] }> {
+function enrichData(cachedData: any): { enrichedRecords: EnrichedRecord[], enrichedClusters: any[] } {
     const { rows: allRecords, clusters } = cachedData;
     if (!allRecords || !clusters) {
         throw new Error("Invalid cache: missing rows or clusters.");
